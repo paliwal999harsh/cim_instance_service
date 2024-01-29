@@ -1,0 +1,40 @@
+
+# MongoDB Configuration
+spring:
+  profiles:
+    active: default
+  application:
+    name: instance-service
+  # security:
+  #   user:
+  #     name: admin
+  #     password: admin
+  data:
+    mongodb:
+      database: CIM_DB
+      autoIndexCreation: true
+# Server Configuration
+server:
+  port: 8080
+
+# Logging Configuration
+logging:
+  level:
+    root: INFO
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_URI:http://localhost:8080/eureka}
+  instance:
+    preferIpAddress: true
+---
+spring:
+  config.activate.on-profile: docker
+  data:
+    mongodb:
+      host: mongo
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_URI:http://composite-service:8080/eureka}
